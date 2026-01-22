@@ -4,11 +4,12 @@ export interface Product {
     name: string;
     brand: string;
     category: string;
+    categorySlug: string; // Added for filtering
     description: string;
     specs: Record<string, string>;
     stockStatus: "Stokta" | "Tükendi" | "Sipariş Üzerine";
     images: string[];
-    price?: string; // B2B'de genelde gizli olur ama opsiyonel ekledim
+    price?: string;
     sku: string;
 }
 
@@ -19,6 +20,7 @@ export const PRODUCTS: Product[] = [
         slug: "gsr-180-li-akulu-delme-vidalama",
         brand: "Bosch Professional",
         category: "Elektrikli El Aletleri",
+        categorySlug: "elektrikli-el-aletleri",
         description: "<p>Bosch kalitesiyle uygun fiyatlı <b>GSR 180-Li</b>, değiştirilebilir kömür fırçaları ile motorun kullanım ömrünü uzatır. Dayanıklı gövde tasarımı ve hücre koruması sayesinde zorlu şantiye koşullarına dayanıklıdır.</p>",
         specs: {
             "Akü Gerilimi": "18.0 V",
@@ -40,6 +42,7 @@ export const PRODUCTS: Product[] = [
         slug: "dhr242z-sarjli-kirici-delici",
         brand: "Makita",
         category: "Elektrikli El Aletleri",
+        categorySlug: "elektrikli-el-aletleri",
         description: "<p>Kömürsüz motor teknolojisi ile daha uzun çalışma süresi. Toz emme sistemi takılabilir. Titreşim önleyici gövde yapısı ile konforlu kullanım.</p>",
         specs: {
             "Kapasite (Beton)": "24 mm",
@@ -60,6 +63,7 @@ export const PRODUCTS: Product[] = [
         slug: "3m-6200-yarim-yuz-gaz-maskesi",
         brand: "3M",
         category: "İş Güvenliği & KKD",
+        categorySlug: "is-guvenligi",
         description: "<p>Hafif, dengeli ve konforlu tasarım. Çift filtre sistemi sayesinde düşük solunum direnci sağlar. Farklı gaz ve buhar filtreleri ile kullanılabilir.</p>",
         specs: {
             "Boyut": "Orta (M)",
@@ -79,6 +83,7 @@ export const PRODUCTS: Product[] = [
         slug: "izeltas-kombine-anahtar-takimi-12",
         brand: "İzeltaş",
         category: "Mekanik Aletler",
+        categorySlug: "mekanik-baglanti",
         description: "<p>Yüksek kaliteli krom vanadyum çeliğinden üretilmiştir. Sıcak dövme teknolojisi ile ekstra dayanıklılık. Nikel üzeri krom kaplama korozyona karşı korur.</p>",
         specs: {
             "Parça Sayısı": "12",
@@ -98,6 +103,7 @@ export const PRODUCTS: Product[] = [
         slug: "fluke-179-true-rms-dijital-multimetre",
         brand: "Fluke",
         category: "Ölçüm Cihazları",
+        categorySlug: "olcum-cihazlari",
         description: "<p>Endüstriyel standartlarda hassas ölçüm. True-RMS özelliği sayesinde bozuk dalga formlarında bile doğru ölçüm yapar. Sıcaklık ölçüm probu dahildir.</p>",
         specs: {
             "AC Gerilim": "1000 V",
@@ -117,6 +123,7 @@ export const PRODUCTS: Product[] = [
         slug: "wurth-fren-balata-temizleyici-500ml",
         brand: "Würth",
         category: "Kimyasallar",
+        categorySlug: "kimyasallar",
         description: "<p>Fren sistemlerindeki toz, yağ, gres ve kirleri hızla temizler. Kalıntı bırakmaz. Montaj ve tamir işlemlerinde parça temizliği için idealdir.</p>",
         specs: {
             "Hacim": "500 ml",
@@ -136,6 +143,7 @@ export const PRODUCTS: Product[] = [
         slug: "stanley-fatmax-serit-metre-5m",
         brand: "Stanley",
         category: "Ölçüm Cihazları",
+        categorySlug: "olcum-cihazlari",
         description: "<p>32mm genişliğinde şerit, 3.35 metreye kadar kırılmadan uzayabilir. BladeArmor kaplama sayesinde şeridin ilk 10cm'si kırılmaya karşı ekstra korumalıdır.</p>",
         specs: {
             "Uzunluk": "5 m",
@@ -155,6 +163,7 @@ export const PRODUCTS: Product[] = [
         slug: "knipex-kombine-pense-180mm",
         brand: "Knipex",
         category: "Mekanik Aletler",
+        categorySlug: "mekanik-baglanti",
         description: "<p>Özel takım çeliğinden dövme, yağda sertleştirilmiş. Kesici ağızlar ayrıca indüksiyonla sertleştirilmiştir (sertlik yakl. 60 HRC).</p>",
         specs: {
             "Uzunluk": "180 mm",
