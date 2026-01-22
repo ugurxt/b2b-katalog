@@ -61,7 +61,7 @@ export default function ProductsPage({
                                     alt={product.name}
                                     className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
                                 />
-                                {product.stockStatus === "in_stock" && (
+                                {product.stockStatus === "Stokta" && (
                                     <span className="absolute top-3 right-3 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded">
                                         STOKTA
                                     </span>
