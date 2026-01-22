@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Kategori Modeli (Recursive)
+model Category {
+  id        String     @id @default(uuid())
+  name      String
+  slug      String     @unique
+  imageUrl  String?
+  parentId  String?
+  parent    Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryToCategory")
+  products  Product[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@index([parentId])
+}
+
+// Ürün Modeli
+model Product {
+  id          String            @id @default(uuid())
+  name        String
+  slug        String            @unique
+  description String?           // Rich text içerik
+  specs       Json?             // Teknik özellikler JSON formatında: { "Renk": "Kırmızı", "Ağırlık": "5kg" }
+  categoryId  String
+  category    Category          @relation(fields: [categoryId], references: [id])
+  isActive    Boolean           @default(true)
+  images      ProductImage[]
+  documents   ProductDocument[] // Teknik dökümanlar (PDF vb.)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Gelecekte eklenebilecek Sepet/Sipariş modülü için altyapı
+  // orderItems OrderItem[]
+
+  @@index([categoryId])
+}
+
+// Ürün Görselleri
+model ProductImage {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+// Ürün Dokümanları (PDF, Datasheet vb.)
+model ProductDocument {
+  id        String   @id @default(uuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  fileUrl   String
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+// Referanslar
+model Reference {
+  id        String   @id @default(uuid())
+  title     String
+  logoUrl   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Statik Sayfalar (Hakkımızda, İletişim, KVKK vb.)
+model Page {
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  title       String
+  contentHtml String // HTML formatında içerik
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Admin Kullanıcıları
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Site Ayarları (Key-Value Store)
+model SiteSettings {
+  id        String   @id @default(uuid())
+  key       String   @unique // Örn: "site_title", "contact_phone", "hero_title"
+  value     String   // Değer
+  group     String   // Gruplama için: "general", "hero", "contact"
+  updatedAt DateTime @updatedAt
+}
