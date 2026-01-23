@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
                             + Yeni Kategori Oluştur
                         </button>
                         <button className="w-full text-left p-3 rounded-lg border hover:bg-gray-50 transition-colors text-sm font-medium">
-                 > İletişim Mesajlarını Oku
+                            İletişim Mesajlarını Oku
                         </button>
                     </div>
                 </div>
