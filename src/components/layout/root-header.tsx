@@ -35,16 +35,9 @@ export default function RootHeader({ logoUrl }: { logoUrl?: string }) {
             <div className="container flex h-20 items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center space-x-2">
-                    {logoUrl ? (
-                        <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
-                    ) : (
-                        <>
-                            <div className="bg-primary text-primary-foreground p-1.5 rounded-lg">
-                                <ShoppingBag className="h-6 w-6" />
-                            </div>
-                            <span className="font-bold text-2xl tracking-tight">NEXEN<span className="text-primary">DIGITAL</span></span>
-                        </>
-                    )}
+                    <span className="font-black text-2xl tracking-tighter text-foreground">
+                        NEXEN<span className="text-primary">DIGITAL</span>
+                    </span>
                 </Link>
 
                 {/* Desktop Navigation */}
